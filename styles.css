@@ -2,18 +2,18 @@
    Design tokens
 =========================================================== */
 :root{
-  --ink:        #14201C;
-  --ink-soft:   #445048;
-  --paper:      #EEF0EA;
-  --panel:      #FFFFFF;
-  --rule:       #D7DCD3;
-  --pass:       #1E7A54;
-  --pass-bg:    #E4F0E9;
-  --pending:    #8A6A1C;
-  --pending-bg: #F1EADA;
-  --term-bg:    #101815;
+  --ink:        #E8EDE9;
+  --ink-soft:   #9AAAA1;
+  --paper:      #0E1512;
+  --panel:      #151F1B;
+  --rule:       #2A3833;
+  --pass:       #4FD8A0;
+  --pass-bg:    #16362B;
+  --pending:    #E0B24D;
+  --pending-bg: #392E14;
+  --term-bg:    #060B09;
   --term-text:  #D9E4DC;
-  --term-dim:   #7FA394;
+  --term-dim:   #64857A;
 
   --font-mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
   --font-sans: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -64,7 +64,7 @@ a{ color: inherit; }
 =========================================================== */
 .site-header{
   position: sticky; top:0; z-index: 50;
-  background: rgba(238,240,234,0.9);
+  background: rgba(14,21,18,0.85);
   backdrop-filter: blur(6px);
   border-bottom: 1px solid var(--rule);
 }
@@ -168,9 +168,10 @@ a{ color: inherit; }
 .console{
   background: var(--term-bg);
   color: var(--term-text);
+  border: 1px solid var(--rule);
   border-radius: 8px;
   overflow: hidden;
-  box-shadow: 0 20px 50px -20px rgba(16,24,21,0.5);
+  box-shadow: 0 20px 50px -20px rgba(0,0,0,0.6);
 }
 .console-head{
   padding: 10px 16px;
@@ -234,7 +235,7 @@ a{ color: inherit; }
    Sections
 =========================================================== */
 .section{ padding: 76px 0; border-top: 1px solid var(--rule); }
-.section-alt{ background: rgba(255,255,255,0.5); }
+.section-alt{ background: rgba(255,255,255,0.02); }
 
 .section-grid{
   display:grid;
