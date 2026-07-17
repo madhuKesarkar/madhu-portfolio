@@ -17,3 +17,27 @@ if (themeToggle) {
     try { localStorage.setItem('theme', next); } catch (e) { /* ignore */ }
   });
 }
+
+// Contact form: submit via fetch so the page doesn't reload (Netlify Forms)
+const contactForm = document.getElementById('contactForm');
+const formStatus = document.getElementById('formStatus');
+if (contactForm) {
+  contactForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const data = new FormData(contactForm);
+    const body = new URLSearchParams(data).toString();
+
+    fetch('/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body
+    })
+      .then(() => {
+        formStatus.textContent = "Thanks — your message is on its way. I'll reply soon.";
+        contactForm.reset();
+      })
+      .catch(() => {
+        formStatus.textContent = 'Something went wrong. Please try emailing directly instead.';
+      });
+  });
+}
