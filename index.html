@@ -9,6 +9,17 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
+<script>
+  (function(){
+    try{
+      var saved = localStorage.getItem('theme');
+      var theme = saved || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+      document.documentElement.setAttribute('data-theme', theme);
+    }catch(e){
+      document.documentElement.setAttribute('data-theme', 'dark');
+    }
+  })();
+</script>
 </head>
 <body>
 
@@ -23,7 +34,13 @@
       <a href="#writing">writing</a>
       <a href="#contact">contact</a>
     </nav>
-    <a class="btn btn-ghost header-cta" href="#contact">get in touch</a>
+    <div class="header-actions">
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch between light and dark theme">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+      </button>
+      <a class="btn btn-ghost header-cta" href="#contact">get in touch</a>
+    </div>
   </div>
 </header>
 
@@ -74,45 +91,58 @@
         <span class="label-tag">about</span>
       </div>
       <div class="section-body">
-        <p class="lead-text">QA leader with 16+ years of experience building quality engineering strategies across Banking, Financial Services, and Early Education domains. Currently focused on Agentic AI and Generative AI-driven test automation, designing frameworks that bring intelligent, self-adapting testing to complex enterprise systems. Passionate about bridging traditional QA rigor with next-generation AI capabilities to drive faster, smarter, and more reliable software delivery.</p>
+        <div class="about-layout">
 
-        <div class="skill-groups">
-          <div class="skill-group">
-            <p class="skill-group-label">Cloud &amp; AI</p>
-            <ul class="chip-list">
-              <li>AWS Bedrock / GenAI</li>
-              <li>GCP AI Platform &amp; GKE</li>
-              <li>Agentic AI Testing</li>
-              <li>Prompt Engineering</li>
-            </ul>
+          <div class="about-photo-col">
+            <figure class="about-photo">
+              <img src="images/profile.png" alt="Madhu Kesarkar" loading="lazy">
+              <figcaption>Madhu Kesarkar</figcaption>
+            </figure>
           </div>
-          <div class="skill-group">
-            <p class="skill-group-label">Automation &amp; Testing</p>
-            <ul class="chip-list">
-              <li>PACT Contract Testing</li>
-              <li>Selenium · Cypress · WebdriverIO · Appium</li>
-              <li>API Testing — Postman, REST, SOAP</li>
-              <li>Mobile Automation — iOS &amp; Android</li>
-              <li>Microservices QA</li>
-            </ul>
-          </div>
-          <div class="skill-group">
-            <p class="skill-group-label">Tooling &amp; Observability</p>
-            <ul class="chip-list">
-              <li>CI/CD — Jenkins &amp; GitHub Actions</li>
-              <li>Splunk · Dynatrace · New Relic</li>
-              <li>Linear</li>
-            </ul>
-          </div>
-        </div>
 
-        <div class="now-block">
-          <p class="now-heading">Currently</p>
-          <ul class="now-list">
-            <li>Leading end-to-end QA strategy for brightwheel's EdTech SaaS platform, serving 1M+ users</li>
-            <li>Designing AI-assisted testing workflows and exploring agentic QA pipeline concepts</li>
-            <li>Exploring Engineering Manager roles in GenAI / SaaS, in India and internationally</li>
-          </ul>
+          <div class="about-text-col">
+            <p class="lead-text">QA leader with 16+ years of experience building quality engineering strategies across Banking, Financial Services, and Early Education domains. Currently focused on Agentic AI and Generative AI-driven test automation, designing frameworks that bring intelligent, self-adapting testing to complex enterprise systems. Passionate about bridging traditional QA rigor with next-generation AI capabilities to drive faster, smarter, and more reliable software delivery.</p>
+
+            <div class="skill-groups">
+              <div class="skill-group">
+                <p class="skill-group-label">Cloud &amp; AI</p>
+                <ul class="chip-list">
+                  <li>AWS Bedrock / GenAI</li>
+                  <li>GCP AI Platform &amp; GKE</li>
+                  <li>Agentic AI Testing</li>
+                  <li>Prompt Engineering</li>
+                </ul>
+              </div>
+              <div class="skill-group">
+                <p class="skill-group-label">Automation &amp; Testing</p>
+                <ul class="chip-list">
+                  <li>PACT Contract Testing</li>
+                  <li>Selenium · Cypress · WebdriverIO · Appium</li>
+                  <li>API Testing — Postman, REST, SOAP</li>
+                  <li>Mobile Automation — iOS &amp; Android</li>
+                  <li>Microservices QA</li>
+                </ul>
+              </div>
+              <div class="skill-group">
+                <p class="skill-group-label">Tooling &amp; Observability</p>
+                <ul class="chip-list">
+                  <li>CI/CD — Jenkins &amp; GitHub Actions</li>
+                  <li>Splunk · Dynatrace · New Relic</li>
+                  <li>Linear</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="now-block">
+              <p class="now-heading">Currently</p>
+              <ul class="now-list">
+                <li>Leading end-to-end QA strategy for brightwheel's EdTech SaaS platform, serving 1M+ users</li>
+                <li>Designing AI-assisted testing workflows and exploring agentic QA pipeline concepts</li>
+                <li>Exploring Engineering Manager roles in GenAI / SaaS, in India and internationally</li>
+              </ul>
+            </div>
+          </div>
+
         </div>
       </div>
     </div>
