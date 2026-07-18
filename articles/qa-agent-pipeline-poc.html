@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Building a QA Agent Pipeline: Early Lessons from a POC — Madhu Kesarkar</title>
-<meta name="description" content="A high-level look at an agentic QA pipeline POC — requirements-reviewer, test-planner, executor and bug-analyser agents triggered from Linear, and the real challenges hit along the way.">
+<title>Building a QA Agent Pipeline: Early Lessons from a POC | Madhu Kesarkar</title>
+<meta name="description" content="A high-level look at an agentic QA pipeline POC: requirements-reviewer, test-planner, executor and bug-analyser agents triggered from Linear, and the real challenges hit along the way.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
@@ -27,7 +27,7 @@
 
 <header class="site-header">
   <div class="wrap header-inner">
-    <a class="brand" href="../index.html#top">madhu<span class="brand-dim">@</span>kesarkar</a>
+    <a class="brand" href="../index.html#top">Madhu Kesarkar</a>
     <nav class="main-nav" aria-label="Primary">
       <a href="../index.html#about">about</a>
       <a href="../index.html#experience">experience</a>
@@ -52,65 +52,65 @@
 
       <p class="eyebrow">agentic ai · qe leadership</p>
       <h1 class="article-title">Building a QA Agent Pipeline: Early Lessons from a POC</h1>
-      <p class="article-dek">What it looks like to route a requirement through a requirements-reviewer, test-planner, executor, bug-analyser, and reporter agent — and where the pipeline still breaks on real projects.</p>
+      <p class="article-dek">What it looks like to route a requirement through a requirements-reviewer, test-planner, executor, bug-analyser, and reporter agent, and where the pipeline still breaks on real projects.</p>
 
       <div class="article-prose">
 
-        <p>For 16 years, my job has had the same shape regardless of the company: someone writes a requirement, someone builds it, and somewhere in between, QA has to figure out <em>what "done" actually means</em> — often by chasing that requirement across five different tools.</p>
+        <p>For most of my QA career, the job has looked the same no matter where I've worked: someone writes a requirement, someone builds it, and QA has to work out what "done" actually means, usually by chasing that requirement across four or five different tools.</p>
 
-        <p>That chase is what I set out to remove first.</p>
+        <p>That's the part I wanted to fix first.</p>
 
-        <h2>The problem we were actually solving</h2>
+        <h2>The problem we were solving</h2>
 
-        <p>On any given feature, the "requirement" doesn't live in one place. Part of it is a Google Doc. Part of it is a Slack thread where a PM clarified an edge case three weeks ago. Part of it is a Figma prototype nobody annotated. And part of it is a one-line spec attached to a Linear ticket almost as an afterthought.</p>
+        <p>A requirement rarely lives in one place. Some of it sits in a Google Doc. Some of it was clarified in a Slack thread weeks ago. Some of it only exists as a Figma prototype nobody annotated. And often there's a one-line spec bolted onto a Linear ticket as an afterthought.</p>
 
-        <p>None of that is anyone's fault — it's just how fast-moving teams actually work. But it means a QA engineer's first real task on any ticket isn't testing. It's <em>archaeology</em>. And archaeology doesn't scale, especially when you're trying to bring AI-assisted testing into an org that still moves at human speed.</p>
+        <p>That's not a knock on how teams work. It's just what happens when things move fast. But it means QA's first job on a ticket isn't testing. It's tracking down what was actually asked for. That step alone eats real time, and it doesn't scale well once you're also trying to bring AI-assisted testing into the process.</p>
 
-        <p>So the POC wasn't "let's use AI to write test cases." It was: <strong>what if the requirement-gathering step itself became a pipeline, not a scavenger hunt?</strong></p>
+        <p>So this POC wasn't really about getting AI to write test cases faster. It was about fixing the step before that: turning requirement-gathering into something automatic, instead of something QA does by hand on every ticket.</p>
 
-        <h2>The high-level setup</h2>
+        <h2>How it's set up</h2>
 
-        <p>The system is triggered entirely by how a Linear ticket is labeled — no separate tool for engineers or PMs to learn.</p>
+        <p>Everything is triggered by how a Linear ticket gets labeled. No new tool for engineers or PMs to learn, just the labels they already use.</p>
 
-        <p><strong>Step 1 — Ready for QA.</strong> When a ticket is labeled <code>ready for QA</code>, a hook fires and hands the ticket to a <strong>requirements-reviewer</strong> agent. Its only job is to go pull together everything relevant — the linked Google Doc, the referenced Slack channel discussion, the Figma prototype, and whatever spec is attached to the ticket itself — and consolidate it into one coherent picture of what's actually being asked for.</p>
+        <p>When a ticket is labeled <code>ready for QA</code>, a hook picks it up and hands it to a requirements-reviewer agent. Its job is to go collect everything relevant (the linked Google Doc, the Slack discussion, the Figma prototype, the spec on the ticket) and pull it into one requirement.</p>
 
-        <p><strong>Step 2 — Planning.</strong> That consolidated requirement gets handed to a <strong>test-planner</strong> agent, which drafts a test plan and a set of test scenarios and cases against it.</p>
+        <p>That goes to a test-planner agent, which writes the test plan and test cases against it.</p>
 
-        <p><strong>Step 3 — Ready for QA execution.</strong> Once the ticket is re-labeled to signal execution should start, an <strong>executor</strong> agent runs the plan across our lower environments. In parallel, a separate <strong>bug-analyser</strong> agent watches for deviations — mismatches against the requirement doc, UI inconsistencies, unexpected application behavior — rather than waiting for the whole run to finish first.</p>
+        <p>When the ticket gets relabeled <code>ready for QA execution</code>, an executor agent runs that plan across our lower environments. A separate bug-analyser agent runs alongside it, watching for anything that doesn't match the requirement (UI issues, unexpected behaviour) instead of waiting until the whole run finishes.</p>
 
-        <p><strong>Step 4 — Reporting.</strong> Once execution hits 100%, a <strong>status-reporter</strong> agent takes over: it pulls together pass/fail counts, maps any bugs back to the specific requirement lines they violate, comments that summary directly on the original Linear ticket, tags the ticket owner for visibility, and posts an update to the feature's Slack channel.</p>
+        <p>Once execution hits 100%, a status-reporter agent takes the results, maps any bugs back to the specific part of the requirement they violate, comments the summary on the ticket, tags the owner, and posts an update to the feature's Slack channel.</p>
 
-        <p>End to end, a ticket goes from "labeled ready for QA" to "here's your test summary and any bugs, already mapped to what you asked for" — without a human manually stitching together docs, chasing Slack threads, or writing the status update by hand.</p>
+        <p>By the time a person looks at the ticket again, there's already a test plan, an execution result, and a mapped bug list waiting for them.</p>
 
         <figure class="article-figure">
           <img src="images/pipeline-flow.svg" alt="Pipeline flow: from a Linear ticket labeled ready for QA, through requirements-reviewer, test-planner, executor and bug-analyser running in parallel, to a status-reporter that comments back on the ticket and posts to Slack">
-          <figcaption>The full pipeline, end to end. Two Linear labels are the only manual trigger points — everything else runs on its own.</figcaption>
+          <figcaption>The full pipeline, end to end. Two Linear labels are the only manual trigger points. Everything else runs on its own.</figcaption>
         </figure>
 
         <h2>Where it actually got hard</h2>
 
-        <p>The architecture above sounds clean in a diagram. It was not clean in practice, and that's really the point of writing this up.</p>
+        <p>The setup above sounds tidy. It wasn't, in practice, and that's the part worth writing down.</p>
 
-        <p><strong>Requirements are often genuinely incomplete, not just scattered.</strong> Early on, the requirements-reviewer agent would confidently consolidate a requirement that was missing a decision entirely — because no one had actually made that decision yet. The fix wasn't a smarter agent; it was building in an explicit "here's what's still ambiguous" output, so a human sees the gap instead of the pipeline silently guessing.</p>
+        <p>Requirements are often just incomplete, not scattered. Early on, the requirements-reviewer would stitch together a confident-sounding requirement out of pieces that were missing a decision entirely, because no one had made that decision yet. We had to build in a way for the agent to flag "this part is still unclear" instead of quietly filling the gap itself.</p>
 
-        <p><strong>Parallel bug detection created noise before it created value.</strong> Running the bug-analyser alongside execution, rather than after, was the right call for speed — but it also meant we surfaced a lot of transient environment flakiness as if it were a real defect. We had to teach the pipeline to distinguish "this failed because of the app" from "this failed because the lower environment hiccuped," which took several rounds of tightening before the signal-to-noise ratio was trustworthy enough for anyone to actually read the reports.</p>
+        <p>Running the bug-analyser in parallel with execution created noise before it created value. It's the right call for speed, but early on it flagged a lot of environment flakiness as if it were a real product bug. It took a few rounds of tuning before the difference between "the app is wrong" and "the environment hiccuped" was reliable enough for anyone to trust the output.</p>
 
-        <p><strong>Mapping bugs back to requirement lines is deceptively hard.</strong> It's one thing to say "this test failed." It's another to say "this failed because of paragraph three of the spec, not paragraph one" — and that mapping is what makes the final report actually useful instead of just another list of failures. Getting that traceability right took more iteration than the testing logic itself.</p>
+        <p>Mapping a bug back to the right line of the requirement is harder than it sounds. Saying "this test failed" isn't useful on its own. Saying "this failed because of what's in paragraph three, not paragraph one" is what actually makes the report worth reading. That mapping took more iteration than the test execution logic did.</p>
 
         <figure class="article-figure">
-          <img src="images/example-status-report.svg" alt="Example bar chart of an illustrative status report: 42 passed, 6 failed, 5 bugs mapped to requirement, 2 unmapped deviations">
-          <figcaption>A mockup of the kind of breakdown the status-reporter posts back to the ticket — real numbers vary run to run, this is just to show the shape of it.</figcaption>
+          <img src="images/example-status-report.svg" alt="Example bar chart of an illustrative status report showing total test cases, passed, failed, not testable, and no-run counts, with execution completion highlighted at roughly 12 percent">
+          <figcaption>A mockup of the kind of breakdown the status-reporter posts back to the ticket. Real numbers vary run to run, this is just to show the shape of it.</figcaption>
         </figure>
 
-        <p><strong>Trust had to be earned ticket by ticket.</strong> The team didn't fully lean on the automated status report on day one, and they shouldn't have — early reports had gaps, and pretending otherwise would have cost more trust than it built. The report only became something people acted on directly once it had a track record of being right.</p>
+        <p>The team didn't lean on the automated report right away, and that was fair. Early reports had real gaps. It only became something people acted on directly once it had built up a track record of being right.</p>
 
-        <h2>Where this stands</h2>
+        <h2>Where it stands</h2>
 
-        <p>This is still a POC, not a finished framework — and I want to be upfront about that rather than oversell it. But even at this stage, the shift already feels real: QA's first move on a ticket is no longer "let me go find out what this actually means." That step increasingly happens before a human is even looking at the ticket.</p>
+        <p>This is a POC, not a finished framework, and I don't want to oversell it. But the shift is already real: QA's first move on a ticket is no longer "let me go find out what this means." That work increasingly happens before anyone's looking at the ticket.</p>
 
-        <p>The next round of work is less about the agents themselves and more about calibration — tightening how confidently the bug-analyser flags something as a real defect, and making the ambiguity-detection in requirements-review sharper so it catches gaps earlier rather than downstream.</p>
+        <p>The next stretch of work is less about adding agents and more about tightening what's already there: getting the bug-analyser more precise about what counts as a real defect, and getting the requirements-reviewer better at flagging gaps early instead of downstream.</p>
 
-        <p>More on that as it develops.</p>
+        <p>More once there's more to report.</p>
 
       </div>
 
