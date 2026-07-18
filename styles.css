@@ -493,11 +493,90 @@ a{ color: inherit; }
   margin-bottom: 12px;
 }
 .queue-item h3{ margin: 0 0 8px; font-size: 1.05rem; }
+.queue-item h3 a{ color: var(--ink); text-decoration: none; }
+.queue-item h3 a:hover{ color: var(--pass); }
 .queue-item p{ margin: 0 0 14px; color: var(--ink-soft); }
 
+.queue-status-live{
+  color: var(--pass);
+  background: var(--pass-bg);
+}
+
+.read-link{
+  display:inline-block;
+  margin-top: 14px;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--pass);
+  text-decoration: none;
+}
+.read-link:hover{ text-decoration: underline; }
+
 /* ===========================================================
-   Contact
+   Article page
 =========================================================== */
+.article-wrap{ max-width: 720px; }
+
+.back-link{
+  display:inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--ink-soft);
+  text-decoration: none;
+  margin-bottom: 28px;
+}
+.back-link:hover{ color: var(--pass); }
+.back-link-bottom{ margin-top: 40px; margin-bottom: 0; }
+
+.article-title{
+  font-family: var(--font-mono);
+  font-size: clamp(1.6rem, 3.4vw, 2.3rem);
+  line-height: 1.25;
+  margin: 0 0 18px;
+}
+
+.article-dek{
+  font-size: 1.1rem;
+  color: var(--ink-soft);
+  margin: 0 0 40px;
+  padding-bottom: 32px;
+  border-bottom: 1px solid var(--rule);
+}
+
+.article-prose{ font-size: 1.05rem; }
+.article-prose p{ margin: 0 0 22px; }
+.article-prose h2{
+  font-family: var(--font-mono);
+  font-size: 1.3rem;
+  margin: 44px 0 18px;
+}
+.article-prose strong{ color: var(--ink); }
+.article-prose code{
+  font-family: var(--font-mono);
+  font-size: 0.88em;
+  background: var(--panel);
+  border: 1px solid var(--rule);
+  padding: 2px 6px;
+  border-radius: 3px;
+}
+
+.article-figure{
+  margin: 36px 0;
+}
+.article-figure img{
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  border: 1px solid var(--rule);
+  display:block;
+}
+.article-figure figcaption{
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--ink-soft);
+  margin-top: 10px;
+  font-style: italic;
+}
 .section-contact{ text-align:center; }
 .contact-title{
   font-family: var(--font-mono);
